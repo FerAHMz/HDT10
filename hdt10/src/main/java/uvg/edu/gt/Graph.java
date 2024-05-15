@@ -23,12 +23,16 @@ public class Graph {
 
     // Método para añadir un arco al grafo
     public void addEdge(int source, int dest, int weight) {
-        adjacencyMatrix[source][dest] = weight;
+        if (source < numberOfVertices && dest < numberOfVertices) {
+            adjacencyMatrix[source][dest] = weight;
+        }
     }
 
     // Método para eliminar un arco del grafo
     public void removeEdge(int source, int dest) {
-        adjacencyMatrix[source][dest] = Integer.MAX_VALUE;
+        if (source < numberOfVertices && dest < numberOfVertices) {
+            adjacencyMatrix[source][dest] = Integer.MAX_VALUE;
+        }
     }
 
     // Implementación del algoritmo de Floyd-Warshall para calcular la distancia más corta entre todos los pares de vértices
@@ -54,7 +58,7 @@ public class Graph {
         for (int i = 0; i < numberOfVertices; i++) {
             int maxDistance = 0;
             for (int j = 0; j < numberOfVertices; j++) {
-                if (adjacencyMatrix[i][j] > maxDistance && adjacencyMatrix[i][j] != Integer.MAX_VALUE) {
+                if (adjacencyMatrix[i][j] != Integer.MAX_VALUE && adjacencyMatrix[i][j] > maxDistance) {
                     maxDistance = adjacencyMatrix[i][j];
                 }
             }
@@ -70,8 +74,20 @@ public class Graph {
                 center = i;
             }
         }
-
         return center;
     }
+
+    // Métodos de acceso para numberOfVertices y adjacencyMatrix
+    public int getNumberOfVertices() {
+        return numberOfVertices;
+    }
+
+    public int getWeight(int source, int destination) {
+        if (source < numberOfVertices && destination < numberOfVertices) {
+            return adjacencyMatrix[source][destination];
+        }
+        return Integer.MAX_VALUE; // Retornar un valor por defecto si los índices no son válidos
+    }
 }
+
 
