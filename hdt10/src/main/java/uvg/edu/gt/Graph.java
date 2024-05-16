@@ -37,15 +37,38 @@ public class Graph {
 
     // Implementación del algoritmo de Floyd-Warshall para calcular la distancia más corta entre todos los pares de vértices
     public void floydWarshall() {
+        // Imprimir la matriz antes de empezar el algoritmo
+        System.out.println("Matriz de Adyacencia antes de Floyd-Warshall:");
+        printMatrix();
+
+        // Ejecución del algoritmo de Floyd-Warshall
         for (int k = 0; k < numberOfVertices; k++) {
             for (int i = 0; i < numberOfVertices; i++) {
                 for (int j = 0; j < numberOfVertices; j++) {
-                    if (adjacencyMatrix[i][k] != Integer.MAX_VALUE && adjacencyMatrix[k][j] != Integer.MAX_VALUE &&
-                        adjacencyMatrix[i][k] + adjacencyMatrix[k][j] < adjacencyMatrix[i][j]) {
-                        adjacencyMatrix[i][j] = adjacencyMatrix[i][k] + adjacencyMatrix[k][j];
+                    if (adjacencyMatrix[i][k] != Integer.MAX_VALUE && adjacencyMatrix[k][j] != Integer.MAX_VALUE) {
+                        int newDistance = adjacencyMatrix[i][k] + adjacencyMatrix[k][j];
+                        if (newDistance < adjacencyMatrix[i][j]) {
+                            adjacencyMatrix[i][j] = newDistance;
+                        }
                     }
                 }
             }
+            System.out.println("Matriz de Adyacencia después de iterar con k = " + k + ":");
+            printMatrix();
+        }
+    }
+
+    // Método para imprimir la matriz de adyacencia
+    private void printMatrix() {
+        for (int i = 0; i < numberOfVertices; i++) {
+            for (int j = 0; j < numberOfVertices; j++) {
+                if (adjacencyMatrix[i][j] == Integer.MAX_VALUE) {
+                    System.out.print("INF ");
+                } else {
+                    System.out.print(adjacencyMatrix[i][j] + " ");
+                }
+            }
+            System.out.println();
         }
     }
 
