@@ -1,0 +1,6 @@
+    Mixco Antigua 30
+    Antigua Escuintla 25
+    Escuintla SantaLucia 15
+    Guatemala Mixco 10
+    Antigua Guatemala 45
+    SantaLucia Mixco 40

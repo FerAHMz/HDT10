@@ -51,31 +51,31 @@ public class Graph {
 
     // Método para encontrar el centro del grafo
     public int findGraphCenter() {
-        floydWarshall();  // Asegura que la matriz de distancias más cortas está actualizada
+        floydWarshall();  // Asegura que la matriz de distancias está actualizada
         int[] eccentricity = new int[numberOfVertices];
-
-        // Encuentra la excentricidad de cada vértice
+        int minEccentricity = Integer.MAX_VALUE;
+        int center = -1;  // Inicializar con un valor no válido
+    
         for (int i = 0; i < numberOfVertices; i++) {
             int maxDistance = 0;
             for (int j = 0; j < numberOfVertices; j++) {
-                if (adjacencyMatrix[i][j] != Integer.MAX_VALUE && adjacencyMatrix[i][j] > maxDistance) {
+                if (adjacencyMatrix[i][j] > maxDistance) {
                     maxDistance = adjacencyMatrix[i][j];
                 }
             }
             eccentricity[i] = maxDistance;
-        }
-
-        // Encuentra el vértice con la menor excentricidad
-        int center = 0;
-        int minEccentricity = Integer.MAX_VALUE;
-        for (int i = 0; i < numberOfVertices; i++) {
+            System.out.println("Vertex " + i + " eccentricity: " + maxDistance);
+    
             if (eccentricity[i] < minEccentricity) {
                 minEccentricity = eccentricity[i];
                 center = i;
             }
         }
+    
+        System.out.println("Graph center found: Vertex " + center);
         return center;
     }
+    
 
     // Métodos de acceso para numberOfVertices y adjacencyMatrix
     public int getNumberOfVertices() {
