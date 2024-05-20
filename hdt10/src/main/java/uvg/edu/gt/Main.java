@@ -2,7 +2,16 @@ package uvg.edu.gt;
 
 import java.util.*;
 
+/**
+ * Clase principal que inicializa el grafo desde un archivo, asigna índices a las ciudades,
+ * añade aristas al grafo y lanza la interfaz de línea de comandos (CLI) para interactuar con el grafo.
+ */
 public class Main {
+    /**
+     * Método principal que ejecuta la aplicación.
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados).
+     */
     public static void main(String[] args) {
         String filePath = "G:\\My Drive\\Tercer Semestre\\Algoritmos y Estructura de Datos\\HDT10\\hdt10\\guategrafo.txt";
         List<String[]> edges = FileHandler.readGraphFromFile(filePath);
@@ -34,5 +43,6 @@ public class Main {
         cli.startCLI();
     }
 }
+
 
 

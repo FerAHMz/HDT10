@@ -2,12 +2,23 @@ package uvg.edu.gt;
 
 import java.util.*;
 
+/**
+ * Clase que proporciona una interfaz de línea de comandos (CLI) para interactuar con un grafo.
+ * Permite realizar operaciones como consultar la ruta más corta, mostrar el centro del grafo,
+ * y modificar el grafo.
+ */
 public class GraphCLI {
     private Graph graph;
     private Scanner scanner;
     private Map<String, Integer> cityIndexMap;
     private Map<Integer, String> indexToCityMap;
 
+    /**
+     * Constructor de la clase GraphCLI.
+     * Inicializa el grafo, el escáner y los mapas de ciudades.
+     *
+     * @param graph el objeto Graph que se utilizará para las operaciones.
+     */
     public GraphCLI(Graph graph) {
         this.graph = graph;
         this.scanner = new Scanner(System.in);
@@ -16,6 +27,10 @@ public class GraphCLI {
         initializeCityIndexMap();
     }
 
+    /**
+     * Inicializa el mapa de índices de ciudades con valores predefinidos.
+     * También invierte el mapa para obtener el nombre de la ciudad a partir de su índice.
+     */
     private void initializeCityIndexMap() {
         cityIndexMap.put("Mixco", 0);
         cityIndexMap.put("Antigua", 1);
@@ -28,6 +43,9 @@ public class GraphCLI {
         }
     }
 
+    /**
+     * Inicia la interfaz de línea de comandos y procesa las entradas del usuario.
+     */
     public void startCLI() {
         boolean running = true;
         while (running) {
@@ -54,6 +72,9 @@ public class GraphCLI {
         }
     }
 
+    /**
+     * Muestra el menú de operaciones disponibles en la CLI.
+     */
     private void displayMenu() {
         System.out.println("\n--- Graph Operations Menu ---");
         System.out.println("1. Query shortest path between cities");
@@ -63,6 +84,10 @@ public class GraphCLI {
         System.out.print("Enter choice: ");
     }
 
+    /**
+     * Solicita al usuario las ciudades de origen y destino y muestra la ruta más corta entre ellas.
+     * Utiliza el algoritmo de Floyd-Warshall para calcular las distancias.
+     */
     private void queryShortestPath() {
         System.out.print("Enter source city: ");
         String sourceCity = scanner.nextLine();
@@ -82,11 +107,17 @@ public class GraphCLI {
         // Implement and call a method to print the actual path if necessary
     }
 
+    /**
+     * Muestra el centro del grafo basado en la excentricidad de los vértices.
+     */
     private void showGraphCenter() {
         int center = graph.findGraphCenter();
         System.out.println("The center of the graph is: " + indexToCityMap.get(center));
     }
 
+    /**
+     * Permite al usuario modificar el grafo añadiendo o eliminando arcos entre ciudades.
+     */
     private void modifyGraph() {
         System.out.println("Choose an option:");
         System.out.println("1. Interrupt traffic between two cities");
@@ -109,3 +140,4 @@ public class GraphCLI {
         System.out.println("Graph updated and paths recalculated.");
     }
 }
+
