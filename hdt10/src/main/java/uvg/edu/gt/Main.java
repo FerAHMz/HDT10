@@ -1,25 +1,38 @@
 package uvg.edu.gt;
 
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        // Asumimos que sabemos el número total de vértices de antemano
-        int numberOfVertices = 5; 
+        String filePath = "G:\\My Drive\\Tercer Semestre\\Algoritmos y Estructura de Datos\\HDT10\\hdt10\\guategrafo.txt";
+        List<String[]> edges = FileHandler.readGraphFromFile(filePath);
+        Map<String, Integer> cityIndexMap = new HashMap<>();
+        int vertexIndex = 0;
+        
+        // Asignar índices a las ciudades
+        for (String[] edge : edges) {
+            if (!cityIndexMap.containsKey(edge[0])) {
+                cityIndexMap.put(edge[0], vertexIndex++);
+            }
+            if (!cityIndexMap.containsKey(edge[1])) {
+                cityIndexMap.put(edge[1], vertexIndex++);
+            }
+        }
+
+        int numberOfVertices = cityIndexMap.size();
         Graph graph = new Graph(numberOfVertices);
 
-        // Añadir algunas aristas para prueba
-        graph.addEdge(0, 1, 10);
-        graph.addEdge(1, 2, 20);
-        graph.addEdge(2, 3, 30);
-        graph.addEdge(3, 4, 40);
-        graph.addEdge(4, 0, 50);
+        // Añadir aristas usando índices mapeados
+        for (String[] edge : edges) {
+            int source = cityIndexMap.get(edge[0]);
+            int destination = cityIndexMap.get(edge[1]);
+            int weight = Integer.parseInt(edge[2]);
+            graph.addEdge(source, destination, weight);
+        }
 
-        // Iniciar la interfaz de línea de comandos con el grafo
         GraphCLI cli = new GraphCLI(graph);
         cli.startCLI();
     }
 }
-
 
 

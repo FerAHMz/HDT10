@@ -14,8 +14,8 @@ public class FileHandler {
         File file = new File(filePath);
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] tokens = line.split(" ");
+                String line = scanner.nextLine().trim();  // Ajuste aquí para eliminar espacios en blanco
+                String[] tokens = line.split("\\s+");  // Split en uno o más espacios
                 if (tokens.length == 3) {
                     edges.add(tokens);
                 } else {
@@ -29,6 +29,5 @@ public class FileHandler {
         return edges;
     }
 }
-
 
 

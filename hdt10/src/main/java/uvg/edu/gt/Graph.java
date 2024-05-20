@@ -112,5 +112,3 @@ public class Graph {
         return Integer.MAX_VALUE; // Retornar un valor por defecto si los índices no son válidos
     }
 }
-
-
